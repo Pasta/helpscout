@@ -369,6 +369,7 @@ module HelpScout
         @width = object["width"]
         @height = object["height"]
         @url = object["url"]
+        @hash = object["hash"]
       end
     end
 
