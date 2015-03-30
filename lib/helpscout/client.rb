@@ -253,6 +253,19 @@ module HelpScout
       end
     end
 
+    def create_attachment(attachment)
+       if !attachment
+        raise StandardError.new("Missing Attachment")
+      end
+
+      url = "/attachments.json"
+
+      begin
+        response = Client.create_item(@auth, url, attachment.to_json)
+      rescue StandardError => e
+        puts "Could not create attachment: #{e.message}"
+      end
+    end
 
     # HelpScout::Client.new
     # 
