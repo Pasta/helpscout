@@ -253,7 +253,7 @@ module HelpScout
       end
     end
 
-     def self.create_item(auth, url, params = {})
+     def self.update_item(auth, url, params = {})
       begin
         response = Client.put(url, {:basic_auth => auth, :headers => { 'Content-Type' => 'application/json' }, :body => params })
       rescue SocketError => se
