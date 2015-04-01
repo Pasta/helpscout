@@ -260,7 +260,7 @@ module HelpScout
         raise StandardError, se.message
       end
 
-      if response.code == 201
+      if response.code == 200
         if response["item"]
           response["item"]
         else
