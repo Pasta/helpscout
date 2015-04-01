@@ -261,11 +261,7 @@ module HelpScout
       end
 
       if response.code == 200
-        if response["item"]
-          response["item"]
-        else
-          response["Location"]
-        end
+        response.code
       else
         raise StandardError.new("Server Response: #{response.code} #{response.message}")
       end
