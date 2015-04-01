@@ -253,6 +253,24 @@ module HelpScout
       end
     end
 
+     def self.create_item(auth, url, params = {})
+      begin
+        response = Client.put(url, {:basic_auth => auth, :headers => { 'Content-Type' => 'application/json' }, :body => params })
+      rescue SocketError => se
+        raise StandardError, se.message
+      end
+
+      if response.code == 201
+        if response["item"]
+          response["item"]
+        else
+          response["Location"]
+        end
+      else
+        raise StandardError.new("Server Response: #{response.code} #{response.message}")
+      end
+    end
+
     def create_attachment(attachment)
        if !attachment
         raise StandardError.new("Missing Attachment")
@@ -527,6 +545,20 @@ module HelpScout
 
       begin
         response = Client.create_item(@auth, url, conversation.to_json)
+      rescue StandardError => e
+        puts "Could not create conversation: #{e.message}"
+      end
+    end
+
+    def update_conversation(conversation)
+      if !conversation
+        raise StandardError.new("Missing Conversation")
+      end
+
+      url = "/conversations/#{ conversation.id }.json"
+
+      begin
+        response = Client.update_item(@auth, url, conversation.to_json)
       rescue StandardError => e
         puts "Could not create conversation: #{e.message}"
       end
