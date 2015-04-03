@@ -551,7 +551,7 @@ module HelpScout
         raise StandardError.new("Missing Thread")
       end
 
-      url = "/conversations/{ conversation_id }.json"
+      url = "/conversations/#{ conversation_id }.json"
 
       begin
         response = Client.create_item(@auth, url, thread.to_json)
