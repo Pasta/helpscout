@@ -546,6 +546,20 @@ module HelpScout
       end
     end
 
+    def create_thread(conversation_id, thread)
+      if !thread
+        raise StandardError.new("Missing Thread")
+      end
+
+      url = "/conversations/{ conversation_id }.json"
+
+      begin
+        response = Client.create_item(@auth, url, thread.to_json)
+      rescue StandardError => e
+        puts "Could not create thread: #{e.message}"
+      end
+    end
+
     def update_conversation(conversation)
       if !conversation
         raise StandardError.new("Missing Conversation")
