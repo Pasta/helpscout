@@ -94,7 +94,7 @@ module HelpScout
       end
 
       begin
-        response = Client.get(request_url, {:basic_auth => auth})
+        response = Client.get(request_url, {:basic_auth => auth, :verify => false })
       rescue SocketError => se
         raise StandardError, se.message
       end
@@ -150,7 +150,7 @@ module HelpScout
       end
 
       begin
-        response = Client.get(request_url, {:basic_auth => auth})
+        response = Client.get(request_url, {:basic_auth => auth, :verify => false })
       rescue SocketError => se
         raise StandardError, se.message
       end
@@ -204,7 +204,7 @@ module HelpScout
       end
 
       begin
-        response = Client.get(request_url, {:basic_auth => auth})
+        response = Client.get(request_url, {:basic_auth => auth, :verify => false })
       rescue SocketError => se
         raise StandardError, se.message
       end
@@ -237,7 +237,7 @@ module HelpScout
 
     def self.create_item(auth, url, params = {})
       begin
-        response = Client.post(url, {:basic_auth => auth, :headers => { 'Content-Type' => 'application/json' }, :body => params })
+        response = Client.post(url, {:basic_auth => auth, :headers => { 'Content-Type' => 'application/json' }, :body => params, :verify => false  })
       rescue SocketError => se
         raise StandardError, se.message
       end
